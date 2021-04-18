@@ -1,5 +1,5 @@
 from telethon.sync import TelegramClient
-from config import *  ## import the user config and details
+from config import *  # import the user config and details
 
 
 def get_client(has_proxy=False, proxy_ip="127.0.0.1", proxy_port=1080):
@@ -15,3 +15,11 @@ def get_client(has_proxy=False, proxy_ip="127.0.0.1", proxy_port=1080):
     return TelegramClient(
         username, api_id, api_hash, proxy=("socks5", proxy_ip, proxy_port)
     )
+
+
+def authorization(client: TelegramClient):
+    client.send_code_request(phonenumber)
+    try:
+        client.sign_in(phone, input('Enter the code: '))
+    except SessionPasswordNeededError:
+        client.sign_in(password=input('Password: '))
