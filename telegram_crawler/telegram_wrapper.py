@@ -23,3 +23,14 @@ def authorization(client: TelegramClient):
         client.sign_in(phone, input('Enter the code: '))
     except SessionPasswordNeededError:
         client.sign_in(password=input('Password: '))
+
+
+async def get_groups_and_channels(client: TelegramClient):
+    groups, channels = [], []
+
+    async for dialog in client.iter_dialogs():
+        if dialog.is_group:
+            groups.append(dialog)
+        elif dialog.is_channel:
+            channels.append(dialog)
+    return groups, channels
