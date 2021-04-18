@@ -8,5 +8,5 @@ client: TelegramClient = get_client(has_proxy=has_proxy)
 
 client.start()
 
-if client.is_user_authorized():
+if not client.is_user_authorized():
     authorization(client)

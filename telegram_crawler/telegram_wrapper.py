@@ -13,12 +13,12 @@ def get_client(has_proxy=False, proxy_ip="127.0.0.1", proxy_port=1080):
         proxy = ("socks5", proxy_ip, proxy_port)
 
     return TelegramClient(
-        username, api_id, api_hash, proxy=("socks5", proxy_ip, proxy_port)
+        username, api_id, api_hash, proxy=proxy
     )
 
 
 def authorization(client: TelegramClient):
-    client.send_code_request(phonenumber)
+    client.send_code_request(phone)
     try:
         client.sign_in(phone, input('Enter the code: '))
     except SessionPasswordNeededError:
