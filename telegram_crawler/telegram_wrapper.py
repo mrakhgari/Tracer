@@ -1,6 +1,6 @@
 from telethon.sync import TelegramClient
 from config import *  # import the user config and details
-
+from message import Message
 
 def get_client(has_proxy=False, proxy_ip="127.0.0.1", proxy_port=1080):
     """
@@ -34,3 +34,10 @@ async def get_groups_and_channels(client: TelegramClient):
         elif dialog.is_channel:
             channels.append(dialog)
     return groups, channels
+
+async def get_history_of_entity(client, chat):
+    messages = []
+
+    async for message in client.iter_messages(chat, wait_time=0):
+        messages.append(Message(message))
+    return messages

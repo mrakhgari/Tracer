@@ -293,3 +293,7 @@ config.py
 .session-journal
 
 *.tmp
+
+
+# data files 
+*.json
