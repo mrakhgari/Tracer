@@ -297,3 +297,4 @@ config.py
 
 # data files 
 *.json
+*.csv
