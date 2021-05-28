@@ -50,6 +50,7 @@ def get_replied_message(_id, _sender_id, messages):
             messages.append(message)
     return m
 
+
 while True:
     title = input("Enter the title: \n")
     query = input("Enter the query: \n")
@@ -58,12 +59,20 @@ while True:
 
     res = es.search(index=index_name, body={
         "query": {
-            "match": {
-                "message": query
+            "bool": {
+                "must": {
+                    "match": {
+                        "message": query
+                    }
+                },
+                "must_not": {
+                    "match": {
+                        "message": "کذب شایعه تکذیب"
+                    }
+                }
             }
         }
     })
-
     messages = []
     for hit in res['hits']['hits']:
         _source = hit["_source"]
@@ -79,7 +88,7 @@ while True:
                         m["reply_to"]["reply_to_msg_id"], _source["sender_id"], messages)
                     if (m.get("_source")):
                         m = m["_source"]
-                    
+
     json_file.append({
         "title": title,
         "query": query,
