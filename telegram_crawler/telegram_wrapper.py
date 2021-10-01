@@ -39,5 +39,7 @@ async def get_history_of_entity(client, chat):
     messages = []
 
     async for message in client.iter_messages(chat, wait_time=0):
+        if has_date_limit and message.date < date_limit:
+            break
         messages.append(Message(message))
     return messages

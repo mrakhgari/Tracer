@@ -46,5 +46,5 @@ all_info['groups'] = groups_info
 all_info['channels'] = channels_info
 
 
-with open('./../data/corona_data.json', 'w', encoding='utf-8') as f:
+with open('./../data/all_data_after_corona.json', 'w', encoding='utf-8') as f:
     json.dump(all_info, f, ensure_ascii=False, indent=4, cls=MessageEncoder)
