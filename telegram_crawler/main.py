@@ -16,7 +16,8 @@ if not client.is_user_authorized():
     authorization(client)
 
 loop = asyncio.get_event_loop()
-# get list of user channells and groups
+
+# get list of user channels and groups
 groups, channels = loop.run_until_complete(get_groups_and_channels(client))
 
 all_info = {}
@@ -45,5 +46,5 @@ all_info['groups'] = groups_info
 all_info['channels'] = channels_info
 
 
-with open('./../data/data.json', 'w', encoding='utf-8') as f:
+with open('./../data/corona_data.json', 'w', encoding='utf-8') as f:
     json.dump(all_info, f, ensure_ascii=False, indent=4, cls=MessageEncoder)
